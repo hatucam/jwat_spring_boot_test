@@ -1,4 +1,4 @@
-package springboot.mappers;
+package src.main.java.springboot.mappers;
 
 import java.util.List;
 

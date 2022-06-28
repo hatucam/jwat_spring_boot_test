@@ -1,5 +1,4 @@
-package springboot.controllers;
-
+package src.main.java.springboot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -10,6 +9,7 @@ import springboot.models.Cinema;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1/cinemas")
 @RestController
 public class CinemaController {
@@ -24,7 +24,7 @@ public class CinemaController {
 
     @GetMapping("/hello")
     public String sayHello() {
-    	return "Heelo!";
+    	return "Hello!";
     }
     
     @GetMapping("/{id}")

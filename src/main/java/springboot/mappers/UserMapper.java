@@ -1,4 +1,4 @@
-package springboot.mappers;
+package src.main.java.springboot.mappers;
 
 import java.util.List;
 
@@ -17,7 +17,11 @@ public interface UserMapper {
 
     int addUser(User user);
 
-    int updateUser(User user);
+    int editUser(User user);
 
     int deleteUser(int userId);
+
+    int updateUser(User user);
+
+    
 }

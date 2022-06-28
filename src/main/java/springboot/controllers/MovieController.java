@@ -1,70 +1,26 @@
-package springboot.controllers;
+package src.main.java.springboot.controllers;
 
+import com.springboot.service.MovieService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import springboot.mappers.MovieMapper;
-import springboot.models.Movie;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1/movies")
 @RestController
 public class MovieController {
     @Autowired
-    private MovieMapper mapper;
+    MovieSevice movieSevice;
 
+    @ApiOperation(value = "Lấy danh sách phim")
     @GetMapping("")
-    public ResponseEntity<List<Movie>> listAll() {
-        List<Movie> listMovie = mapper.findAll();
-        return ResponseEntity.ok(listMovie);
+    public ResponseEntity<?> getAllMovies(){
+        return ResponseEntity.ok(movieSevice.getAllMovie());
     }
-
-    @GetMapping("/hello")
-    public String sayHello() {
-    	return "Heelo!";
-    }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Integer id) {
-        Movie movi = mapper.getMovie(id);
-        if(movi != null){
-            return ResponseEntity.ok(movi);
-        }else {
-            return ResponseEntity.status(404).body("Not Found");
-        }
-
-    }
-
-    @PostMapping("")
-    public ResponseEntity<Integer> createUser(@RequestBody Movie movie){
-        return ResponseEntity.ok(mapper.insert(movie));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@RequestBody Movie movie, @PathVariable Integer id){
-    	Movie movi = mapper.getMovie(id);
-        if(movi != null){
-        	movi.setCinemaId(movie.getCinemaId());
-        	movi.setMovieName(movie.getMovieName());
-        	movi.setMovieTime(movie.getMovieTime());
-            return ResponseEntity.ok(mapper.update(movi));
-        }else {
-            return ResponseEntity.status(404).body("Not Found");
-        }
-    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
-//        Optional<User> user = repo.findById(id);
-//        if(user.isPresent()){
-//            repo.delete(user.get());
-//            return ResponseEntity.ok("Deleted Successfully");
-//        }else {
-//            return ResponseEntity.status(404).body("Not Found");
-//        }
-//    }
 
 }
